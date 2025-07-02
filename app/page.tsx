@@ -1,6 +1,8 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import { useInView } from "react-intersection-observer";
+import { motion } from "motion/react";
 import Link from "next/link";
-
 function Nav() {
   return (
     <nav className="py-[2vh] px-[2vw] flex justify-between items-center fixed w-screen ">
@@ -25,12 +27,22 @@ function Nav() {
   );
 }
 function Home() {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
   return (
-    <div className="flex items-center flex-col" id="home">
-      <h1 className="text-[2rem] sm:text-[4rem] font-bold text-center mt-[15vh]">
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 100 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      className="flex items-center flex-col"
+      id="home"
+    >
+      <h1 className="text-[2rem] md:text-[4rem] font-bold text-center mt-[15vh]">
         Find Your Perfect StudyBuddy
       </h1>
-      <p className="leading-normal text-center mt-[10vh] w-screen sm:w-[31vw] text-[1rem]  sm:text-[1.5rem]">
+      <p className="leading-normal text-center mt-[10vh] w-screen md:w-[31vw] text-[1rem]  md:text-[1.5rem]">
         <span className="text-[#4F46E5] font-bold">Connect</span> with like
         minded students, form{" "}
         <span className="text-[#4F46E5] font-bold">study groups</span>, and
@@ -49,19 +61,26 @@ function Home() {
         </svg>
         Get Started For Free
       </Button>
-    </div>
+    </motion.div>
   );
 }
 function About() {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+  });
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 100 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      ref={ref}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
       className="mt-[45vh] mb-[10vh] flex items-center flex-col text-center"
       id="about"
     >
-      <h1 className="font-bold text-[2rem] sm:text-[4rem] ">
+      <h1 className="font-bold text-[2rem] md:text-[4rem] ">
         What Is StudyBuddy?
       </h1>
-      <p className="leading-normal text-center mt-[10vh] w-screen sm:w-[31vw] text-[1rem] sm:text-[1.5rem]">
+      <p className="leading-normal text-center mt-[10vh] w-screen md:w-[31vw] text-[1rem] md:text-[1.5rem]">
         <span className="text-[#4F46E5] font-bold">StudyBuddy</span> is a
         platform that connects students with compatible{" "}
         <span className="text-[#4F46E5] font-bold">study partners</span> based
@@ -80,7 +99,7 @@ function About() {
         </svg>
         Start Learning Smarter
       </Button>
-    </div>
+    </motion.div>
   );
 }
 function Contact() {

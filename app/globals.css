@@ -6,9 +6,19 @@
 html { 
   scroll-behavior: smooth;
 }
+* {
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
 body {
-  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
+  /* background-color: #121212; */
+    background: linear-gradient(to bottom right, #121212, #191919);
   color: #d9d9d9;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: 0;
 }
 .buttonCustom {
   @apply mt-[5vh] text-[#d2d2d2] bg-[#4f46e5] px-[5vw] rounded-3xl text-[1.1rem]  p-[1.5vw] transition-all duration-300 ease-in-out
