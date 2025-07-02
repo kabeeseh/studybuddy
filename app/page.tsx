@@ -30,7 +30,7 @@ function Home() {
       <h1 className="text-[2rem] sm:text-[4rem] font-bold text-center mt-[15vh]">
         Find Your Perfect StudyBuddy
       </h1>
-      <p className="leading-normal text-center mt-[10vh] w-[31vw] text-[1rem] sm:text-[1.5rem]">
+      <p className="leading-normal text-center mt-[10vh] w-screen sm:w-[31vw] text-[1rem]  sm:text-[1.5rem]">
         <span className="text-[#4F46E5] font-bold">Connect</span> with like
         minded students, form{" "}
         <span className="text-[#4F46E5] font-bold">study groups</span>, and
@@ -61,7 +61,7 @@ function About() {
       <h1 className="font-bold text-[2rem] sm:text-[4rem] ">
         What Is StudyBuddy?
       </h1>
-      <p className="leading-normal text-center mt-[10vh] w-[31vw] text-[1rem] sm:text-[1.5rem]">
+      <p className="leading-normal text-center mt-[10vh] w-screen sm:w-[31vw] text-[1rem] sm:text-[1.5rem]">
         <span className="text-[#4F46E5] font-bold">StudyBuddy</span> is a
         platform that connects students with compatible{" "}
         <span className="text-[#4F46E5] font-bold">study partners</span> based
