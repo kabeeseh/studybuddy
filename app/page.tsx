@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useInView } from "react-intersection-observer";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 function Nav() {
   return (
     <nav className="py-[2vh] px-[2vw] flex justify-between items-center fixed w-screen ">
@@ -30,6 +31,7 @@ function Home() {
   const { ref, inView } = useInView({
     triggerOnce: true,
   });
+  const router = useRouter();
   return (
     <motion.div
       ref={ref}
@@ -51,7 +53,10 @@ function Home() {
           studying smarter, not harder
         </span>
       </p>
-      <Button className="buttonCustom group">
+      <Button
+        className="buttonCustom group"
+        onClick={() => router.push("/signup")}
+      >
         <svg
           className="fill-[#d9d9d9] group-hover:fill-[#4f46e5]"
           xmlns="http://www.w3.org/2000/svg"
@@ -68,6 +73,8 @@ function About() {
   const { ref, inView } = useInView({
     triggerOnce: true,
   });
+  const router = useRouter();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -89,7 +96,10 @@ function About() {
         virtual study sessions, and achieve better grades together through the
         power of collaborative learning.
       </p>
-      <Button className="buttonCustom group">
+      <Button
+        className="buttonCustom group"
+        onClick={() => router.push("/signup")}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"
