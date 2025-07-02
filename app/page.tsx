@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Nav() {
   return (
-    <nav className="py-[2vh] px-[2vw] flex justify-between items-center fixed w-screen bg-[#121212]">
+    <nav className="py-[2vh] px-[2vw] flex justify-between items-center fixed w-screen ">
       <Link href={"#home"} className="text-[1.5rem] font-bold text-[#d9d9d9]">
         StudyBuddy
       </Link>
@@ -85,10 +85,7 @@ function About() {
 }
 function Contact() {
   return (
-    <footer
-      className="mt-[30vh] h-[20vh] bg-[#131313] p-[3vw] flex flex-col"
-      id="contact"
-    >
+    <footer className="mt-[30vh] h-[20vh] p-[3vw] flex flex-col" id="contact">
       <Link
         href={"tel:+96181195890"}
         className="inline-block relative ml-[2vw] gap-[.5vw] font-bold group "
