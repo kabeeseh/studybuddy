@@ -61,7 +61,7 @@ function About() {
       <h1 className="font-bold text-[2rem] sm:text-[4rem] ">
         What Is StudyBuddy?
       </h1>
-      <p className="w-[35vw]  mt-[10vh] text-center">
+      <p className="leading-normal text-center mt-[10vh] w-[31vw] text-[1rem] sm:text-[1.5rem]">
         <span className="text-[#4F46E5] font-bold">StudyBuddy</span> is a
         platform that connects students with compatible{" "}
         <span className="text-[#4F46E5] font-bold">study partners</span> based
