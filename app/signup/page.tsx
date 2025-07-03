@@ -67,7 +67,7 @@ export default function SignUp() {
         <input
           type="text"
           placeholder="Discord Tag"
-          className="bg-[#131313] text-white px-[1vw] text-[30px] text-center"
+          className="bg-[#1b1b1b] text-white px-[1vw] text-[30px] text-center"
           ref={discordUrl}
         />
         <div className="relative inline-block group">
