@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     if (userCheck)
       return new Response("Username already exists", { status: 400 });
-    const userCheck2 = await prisma.user.findMany({
+    const userCheck2 = await prisma.user.findFirst({
       where: {
         discordUrl,
       },

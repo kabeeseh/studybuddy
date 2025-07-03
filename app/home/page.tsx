@@ -31,7 +31,7 @@ export default function Home() {
       })
       .then((res) => {
         setPosts([...posts, ...res.data]);
-        sessionStorage.setItem("posts", JSON.stringify(posts));
+        sessionStorage.setItem("posts", JSON.stringify(res.data));
       })
       .catch((err) => {
         setError(err.response.data);
@@ -53,7 +53,7 @@ export default function Home() {
         className="flex flex-col items-center mt-[20vh] gap-[5vh]"
       >
         {posts.map((post) => (
-          <PostComp post={post} />
+          <PostComp post={post} key={post.id as number} />
         ))}
       </InfiniteScroller>
     </div>

@@ -5,13 +5,16 @@ import { useState } from "react";
 export function Post({ post }: { post: Post }) {
   const [copied, setCopied] = useState(false);
   return (
-    <Card className="w-fit h-fit p-[3vw] flex items-center justify-center gap-[1.8vh] shadow-xl">
+    <Card className="h-fit p-[3vw] flex items-center justify-center gap-[1.8vh] shadow-xl break-words whitespace-normal">
       <CardTitle className="capitalize text-[2rem]">{post.title}</CardTitle>
-      <p className="text-[1.25rem]">{post.description}</p>
+      <div className="w-[40vw]">
+        <p className="text-[1.25rem]">{post.description}</p>
+      </div>
 
       <button
         className="copyButton transition-all duration-300 ease-in-out bg-[#4f46e5] px-[1vw] py-[1vh] rounded text-[1.2rem] font-bold flex justify-center items-center gap-[1vw] group  hover:text-[#4f46e5] hover:bg-transparent"
-        onClick={() => {
+        onClick={async () => {
+          await navigator.clipboard.writeText(post.author.discordUrl as string);
           setCopied(true);
         }}
       >

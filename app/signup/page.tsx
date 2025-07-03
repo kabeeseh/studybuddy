@@ -55,13 +55,13 @@ export default function SignUp() {
         <input
           type="text"
           placeholder="Username"
-          className="bg-[#131313] text-white px-[1vw] text-[30px] text-center"
+          className="bg-[#1b1b1b] text-white px-[1vw] text-[30px] text-center"
           ref={username}
         />
         <input
           type="password"
           placeholder="Password"
-          className="bg-[#131313] text-white px-[1vw] text-[30px] text-center"
+          className="bg-[#1b1b1b] text-white px-[1vw] text-[30px] text-center"
           ref={password}
         />
         <input
