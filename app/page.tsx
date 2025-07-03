@@ -117,7 +117,7 @@ function Contact() {
     <footer className="mt-[30vh] h-[20vh] p-[3vw] flex flex-col" id="contact">
       <Link
         href={"tel:+96181195890"}
-        className="inline-block relative ml-[2vw] gap-[.5vw] font-bold group "
+        className="inline-block relative ml-[2vw] gap-[.5vw] font-bold group w-fit"
       >
         <div className="flex items-center gap-[.5vw]">
           <svg
@@ -134,7 +134,7 @@ function Contact() {
       </Link>
       <Link
         href={"mailto:jadkoneissi@gmail.com"}
-        className="ml-[2vw] gap-[.5vw] font-bold group relative inline-block"
+        className="ml-[2vw] gap-[.5vw] font-bold group relative inline-block w-fit"
       >
         <div className="flex gap-[.5vw]">
           <svg

@@ -15,12 +15,19 @@ html {
   outline: none;
 }
 body {
-  background: linear-gradient(to right, #121212, #191919);
+  background: linear-gradient(to bottom right, #121212, #2b2b2b);
   color: #d9d9d9;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  overflow-x: hidden;
 }
 .buttonCustom {
   @apply mt-[5vh] text-[#d2d2d2] bg-[#4f46e5] px-[5vw] rounded-3xl text-[1.1rem]  p-[1.5vw] transition-all duration-300 ease-in-out
 } 
 .buttonCustom:hover {
-  @apply bg-[#121212] border border-[#4f46e5] text-[#4f46e5]
+  @apply bg-transparent border border-[#4f46e5] text-[#4f46e5]
+}
+.copyButton {
+  border: 1px #4f46e5 solid;
 }

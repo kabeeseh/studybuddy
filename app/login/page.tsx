@@ -7,12 +7,14 @@ import { useRef, useState } from "react";
 import Loading from "../LoadingComp";
 import Error from "../Error";
 import { useRouter } from "next/navigation";
+import { useUser } from "../contexts/UserContext";
 export default function LogIn() {
   const username = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const { setUser } = useUser();
   return loading ? (
     <Loading />
   ) : (
@@ -32,6 +34,7 @@ export default function LogIn() {
           })
           .then((res) => {
             setCookie("token", res.data.token);
+            setUser(res.data.user);
             router.push("/home");
           })
           .catch((err) => {
