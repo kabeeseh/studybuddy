@@ -8,12 +8,12 @@ import Error from "../Error";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import { getCookie } from "cookies-next";
+import Nav from "../Nav";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [error, setError] = useState("");
-  const [hasMore, setHasMore] = useState(false);
-  const { user } = useUser();
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
     const postsStorage: Post[] | null = JSON.parse(
       sessionStorage.getItem("posts") as any
@@ -44,6 +44,7 @@ export default function Home() {
   }, []);
   return (
     <div>
+      <Nav />
       <InfiniteScroller
         dataLength={posts.length}
         hasMore={hasMore}

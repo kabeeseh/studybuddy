@@ -8,6 +8,7 @@ import Error from "../Error";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import { getCookie } from "cookies-next";
+import Nav from "../Nav";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -37,29 +38,32 @@ export default function Home() {
     fetchPosts();
   }, []);
   return (
-    <div className="min-h-screen">
-      <div className="flex items-center justify-center gap-[2vw] mt-[20vh]">
-        <img
-          src={user?.profilePicture as string}
-          alt="profile picture"
-          className="w-[5vw] h-[4.8vw] rounded-full"
-        />
-        <h1 className="text-[3rem]">
-          <span className="font-bold capitalize">{user?.username}</span>!
-        </h1>
+    <div>
+      <Nav />
+      <div>
+        <div className="flex items-center justify-center gap-[2vw] mt-[20vh]">
+          <img
+            src={user?.profilePicture as string}
+            alt="profile picture"
+            className="w-[5vw] h-[4.8vw] rounded-full"
+          />
+          <h1 className="text-[3rem]">
+            <span className="font-bold capitalize">{user?.username}</span>!
+          </h1>
+        </div>
+        <InfiniteScroller
+          dataLength={posts.length}
+          hasMore={hasMore}
+          next={fetchPosts}
+          loader={<Loading />}
+          endMessage={<Error className="text-[2.5rem]">{error}</Error>}
+          className="flex flex-col items-center mt-[20vh] gap-[5vh]"
+        >
+          {posts.map((post) => (
+            <PostComp post={post} key={post.id as number} state={"profile"} />
+          ))}
+        </InfiniteScroller>
       </div>
-      <InfiniteScroller
-        dataLength={posts.length}
-        hasMore={hasMore}
-        next={fetchPosts}
-        loader={<Loading />}
-        endMessage={<Error className="text-[2.5rem]">{error}</Error>}
-        className="flex flex-col items-center mt-[20vh] gap-[5vh]"
-      >
-        {posts.map((post) => (
-          <PostComp post={post} key={post.id as number} state={"profile"} />
-        ))}
-      </InfiniteScroller>
     </div>
   );
 }

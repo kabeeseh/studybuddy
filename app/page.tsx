@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 function Nav() {
   return (
     <nav className="py-[2vh] px-[2vw] flex justify-between items-center fixed w-screen ">
@@ -153,6 +154,12 @@ function Contact() {
   );
 }
 export default function Page() {
+  const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      router.push("/home");
+    }
+  }, []);
   return (
     <>
       <Nav />
