@@ -22,7 +22,7 @@ export default function LogIn() {
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -100 }}
-      className="flex items-center justify-between h-screen gap-[3vw] w-screen px-[1vw]"
+      className="flex justify-center items-center custom-md:justify-between h-screen gap-[3vw] w-screen px-[1vw]"
       onSubmit={(e) => {
         e.preventDefault();
         setLoading(true);
@@ -46,7 +46,7 @@ export default function LogIn() {
       <h1 className="text-red-500 custom-md:text-white text-[64px] custom-md:ml-[2vw]  custom-md:font-bold custom-md:block hidden whitespace-nowrap">
         Welcome Back!
       </h1>
-      <form className=" flex flex-col items-center justify-center w-[90vw] h-[90vh] m-0 p-0 gap-[2vh]">
+      <form className="flex flex-col items-center justify-center w-[90vw] h-[90vh] m-0 p-0 gap-[2vh]">
         <h1 className="text-[40px] font-bold">LogIn</h1>
         {error && <Error>{error}</Error>}
         <input

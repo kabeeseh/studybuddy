@@ -23,7 +23,8 @@ export default function SignUp() {
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -100 }}
-      className="flex items-center justify-between h-screen gap-[3vw] w-screen px-[1vw]"
+      className="flex justify-center
+       items-center custom-md:justify-between h-screen gap-[3vw] w-screen px-[1vw]"
       onSubmit={(e) => {
         e.preventDefault();
         setLoading(true);
