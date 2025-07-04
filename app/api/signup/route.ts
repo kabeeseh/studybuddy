@@ -2,15 +2,21 @@ import { hash } from "bcrypt";
 import { isEmpty } from "../isEmpty";
 import { prisma } from "../prisma";
 import { sign } from "jsonwebtoken";
+import { supabase } from "@/app/supabase";
 
 export async function POST(req: Request) {
   try {
-    const { username, password, discordUrl } = await req.json();
+    const formData = await req.formData();
 
+    const username = formData.get("username")?.toString();
+    const password = formData.get("password")?.toString();
+    const discordUrl = formData.get("discordUrl")?.toString();
+    const image = formData.get("image") as File;
     if (
       !username ||
       !password ||
       !discordUrl ||
+      !image ||
       isEmpty([username, password, discordUrl])
     ) {
       return new Response("All fields are required", { status: 400 });
@@ -34,11 +40,25 @@ export async function POST(req: Request) {
         status: 400,
       });
 
+    const res = await supabase.storage
+      .from(process.env.PP_BUCKET!)
+      .upload(`${new Date()}-${username}`, image);
+
+    const { error } = res;
+    const path = res.data?.path;
+    console.log(error);
+
+    if (error) return new Response("Error uploading image", { status: 500 });
+
+    const { data } = await supabase.storage
+      .from(process.env.PP_BUCKET!)
+      .getPublicUrl(path!);
     const user = await prisma.user.create({
       data: {
         username,
         password: await hash(password, 10),
         discordUrl,
+        profilePicture: data.publicUrl,
       },
       include: {
         posts: true,

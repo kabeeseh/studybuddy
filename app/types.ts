@@ -2,6 +2,7 @@ export type User = {
   id: Number;
   username: String;
   password: String;
+  profilePicture: String;
   discordUrl: String;
   posts: Post[];
   viewedPosts: Post[];
@@ -14,6 +15,7 @@ export type Post = {
   author: User;
   title: String;
   description: String;
+  imageUrl?: String;
   viewedUsers: User[];
   createdAt: Date;
 };

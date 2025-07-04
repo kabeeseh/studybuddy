@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useRef, useState } from "react";
@@ -11,6 +11,7 @@ import { useUser } from "../contexts/UserContext";
 export default function LogIn() {
   const title = useRef<HTMLInputElement>(null);
   const description = useRef<HTMLInputElement>(null);
+  const image = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -27,16 +28,27 @@ export default function LogIn() {
         e.preventDefault();
         setLoading(true);
         setError("");
+        const formData = new FormData();
+        formData.append("title", title.current?.value as string);
+        formData.append("description", description.current?.value as string);
+        if (image.current?.files?.[0]) {
+          formData.append("image", image.current?.files[0] as File);
+        }
+        console.log(image);
+
         axios
-          .post("/api/login", {
-            title: title.current?.value,
-            description: description.current?.value,
+          .post("/api/posts", formData, {
+            headers: {
+              Authorization: `Bearer ${getCookie("token")}`,
+            },
           })
           .then((res) => {
             alert("Posted");
           })
           .catch((err) => {
             setError(err.response.data);
+          })
+          .finally(() => {
             setLoading(false);
           });
       }}
@@ -54,12 +66,19 @@ export default function LogIn() {
           ref={title}
         />
         <input
-          type="password"
+          type="text"
           placeholder="Description"
           className="bg-[#1b1b1b] text-[#d9d9d9] px-[1vw] text-[30px] text-center rounded font-bold"
           ref={description}
         />
-        <button className="bg-[#4f46e5] custom-md:px-[3vw] px-[6vw] py-[1vh] rounded font-bold text-[1.3rem]">
+        <input
+          type="file"
+          accept="image/*"
+          placeholder="Description"
+          className="bg-[#1b1b1b] text-[#d9d9d9] px-[1vw] text-[30px] text-center rounded font-bold"
+          ref={image}
+        />
+        <button className="bg-[#4f46e5] copyButton hover:bg-transparent transition-all duration-300 ease-in-out custom-md:px-[3vw] px-[6vw] py-[1vh] rounded font-bold text-[1.3rem]">
           Post
         </button>
       </form>

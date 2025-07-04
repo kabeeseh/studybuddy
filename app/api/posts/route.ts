@@ -1,6 +1,7 @@
 import { decode, verify } from "jsonwebtoken";
 import { prisma } from "../prisma";
 import { isEmpty } from "../isEmpty";
+import { supabase } from "@/app/supabase";
 
 export async function GET(req: Request) {
   try {
@@ -58,13 +59,33 @@ export async function POST(req: Request) {
       return new Response("Unauthorized", { status: 401 });
     }
 
-    const { title, description } = await req.json();
+    const formData = await req.formData();
+    const title = formData.get("title") as string;
+    const description = formData.get("description") as string;
+    const image = formData.get("image") as File | null;
     const decoded: { id: number; username: string } = decode(authHeader) as any;
 
+    let imageUrl = "";
     if (!title || !description || isEmpty([title, description])) {
       return new Response("Title and description are required", {
         status: 400,
       });
+    }
+    console.log(image);
+
+    if (image != null) {
+      const result = await supabase.storage
+        .from(process.env.IMAGE_BUCKET as string)
+        .upload(`${decoded.id}-${new Date()}`, image);
+      if (result.error)
+        return new Response(result.error.message, { status: 500 });
+      const imagePath = result.data?.path;
+      console.log(result);
+
+      imageUrl = await supabase.storage
+        .from(process.env.IMAGE_BUCKET as string)
+        .getPublicUrl(imagePath as string).data.publicUrl;
+      console.log(imageUrl);
     }
 
     const post = await prisma.post.create({
@@ -72,6 +93,7 @@ export async function POST(req: Request) {
         title,
         description,
         authorId: decoded.id,
+        imageUrl: imageUrl != "" ? imageUrl : null,
       },
     });
 

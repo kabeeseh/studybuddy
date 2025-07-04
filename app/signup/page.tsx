@@ -12,6 +12,7 @@ export default function SignUp() {
   const username = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const discordUrl = useRef<HTMLInputElement>(null);
+  const image = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -29,12 +30,13 @@ export default function SignUp() {
         e.preventDefault();
         setLoading(true);
         setError("");
+        const formData = new FormData();
+        formData.append("username", username.current?.value as string);
+        formData.append("password", password.current?.value as string);
+        formData.append("discordUrl", discordUrl.current?.value as string);
+        formData.append("image", image.current?.files?.[0] as File);
         axios
-          .post("/api/signup", {
-            username: username.current?.value,
-            password: password.current?.value,
-            discordUrl: discordUrl.current?.value,
-          })
+          .post("/api/signup", formData)
           .then((res) => {
             setCookie("token", res.data.token);
             setUser(res.data.user);
@@ -71,14 +73,21 @@ export default function SignUp() {
           className="bg-[#1b1b1b] text-white px-[1vw] text-[30px] text-center"
           ref={discordUrl}
         />
+        <input
+          type="file"
+          accept="image/*"
+          placeholder="Profile Picture"
+          className="bg-[#1b1b1b] text-white px-[1vw] text-[30px] text-center"
+          ref={image}
+        />
         <div className="relative inline-block group">
           <Link href={"/login"} className="color-[#d9d9d9]">
             Already have an account? LogIn now!
           </Link>
           <span className="absolute bottom-0 bg-[#d9d9d9] left-0 h-0.5 w-0 group-hover:w-full transition-all duration-200 "></span>
         </div>
-        <button className="bg-[#4f46e5] custom-md:px-[3vw] px-[6vw] py-[1vh] rounded font-bold text-[1.3rem]">
-          LogIn
+        <button className="bg-[#4f46e5] copyButton border-[#4f46e5] custom-md:px-[3vw] px-[6vw] py-[1vh] rounded font-bold text-[1.3rem] hover:bg-transparent transition-all duration-300 ease-in-out">
+          SignUp
         </button>
       </form>
     </motion.div>
